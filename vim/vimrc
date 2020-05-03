@@ -1,0 +1,78 @@
+"##############################################################
+"# 基础配置
+"##############################################################
+set nocompatible                    " 禁用Vi兼容模式
+filetype off                        " 禁止文件检测
+syntax on                           " 开启语法高亮
+set number                          " 设置显示行号
+set encoding=utf-8                  " 设置为UTF-8编码
+set tabstop=4                       " 设置tab键为4空格
+set shiftwidth=4                    " 设置缩进为4空格
+set autoindent                      " 设置回车后自动缩进
+set ignorecase                      " 设置忽略大小写
+set hlsearch                        " 设置高亮搜索项
+set nobackup                        " 设置不需要备份文件
+set noswapfile                      " 设置不创建临时交换文件
+set nowritebackup                   " 设置编辑的时候不需要备份文件
+set noundofile                      " 设置不创建撤销文件
+"##############################################################
+"# Vundle配置
+"##############################################################
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
+call vundle#end()
+"##############################################################
+"# 快捷键配置
+"##############################################################
+"向右缩进
+nnoremap <tab> V>
+"向左缩进
+nnoremap <s-tab> V<
+"移动到当前行行首
+noremap aa 0
+"移动到当前行行尾
+nnoremap ll $
+"移动到第一行行首
+noremap qq gg
+"移动到最后一行行首
+noremap zz G
+"移动到第一行行尾
+noremap pp gg$
+"移动到最后一行行尾
+noremap mm G$
+
+"删除光标至行首内容
+noremap da d0
+"删除光标至行尾内容
+noremap dl d$
+
+"向上滚动一屏
+nnoremap uu <C-b>
+"向下滚动一屏
+nnoremap nn <C-f>
+"在光标后插入
+nnoremap ; a
+"在行尾插入
+nnoremap <CR><CR> $a
+"保存当前的改动
+inoremap <C-s> <ESC>:w<CR>a
+"撤销上次修改
+noremap <C-z> u
+"不保存退出
+noremap jq <ESC>:q!<CR>
+"保存退出
+noremap jw <ESC>:wq!<CR>
+"进入命令模式
+inoremap je <ESC>
+
+noremap pl <ESC>:PluginList<CR>
+noremap pi <ESC>:PluginInstall<CR>
+noremap pu <ESC>:PluginUpdate<CR>
+noremap ps <ESC>:PluginSearch<CR>
+noremap pc <ESC>:PluginClean<CR>
