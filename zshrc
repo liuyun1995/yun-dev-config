@@ -1,18 +1,23 @@
 ###############################################################################
 # Env settings
 ###############################################################################
-export ZSH="~/.oh-my-zsh"
+export ZSH="/home/lewis/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
-setopt no_nomatch
 
-export NODE_HOME=~/SoftWare/Nodejs
-export M2_HOME=~/SoftWare/Maven
-export JAVA_HOME=~/SoftWare/JDK8/jdk1.8.0_221
+
+export M2_HOME=/opt/apache-maven-3.6.3
+export JAVA_HOME=/opt/jdk1.8.0_251
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$M2_HOME/lib
-export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$NODE_HOME/bin
+
+export GOROOT=/opt/go
+export GOPATH=$HOME/Public/MyPro/GoPro
+export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin
+
+[ -f $HOME/.dotfile/ssh_login.script ] && . $HOME/.dotfile/ssh_login.script
+[ -f $HOME/.dotfile/create_table.script ] && . $HOME/.dotfile/create_table.script
 ###############################################################################
 # Shell Imporvement
 ###############################################################################
@@ -34,15 +39,12 @@ alias szsh='source ~/.zshrc'
 alias c='clear'
 alias x='extract'
 alias art='java -jar /opt/Arthas/arthas-boot.jar'
+alias k='k(){lsof -ti:$1 | xargs kill -9}; k'
 
 function open_window() {
-    if [ "$(uname)" == "Darwin" ];then
-        open $1
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ];then   
-        nautilus $1
-    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ];then    
-        explorer $1
-    fi
+    [ "$(uname)" = "Darwin" ] && open $1
+    [ "$(expr substr $(uname -s) 1 5)" = "Linux" ] && nautilus $1
+    [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ] && explorer $1
 }
 
 function extract() {
@@ -64,6 +66,12 @@ function extract() {
         else
                 echo "'$1' is not a valid file"
     fi
+}
+
+function copyfile() {
+    [ -f zshrc ] && cp -rf zshrc $HOME/.zshrc
+    [ -f dotfile ] && cp -rf dotfile $HOME/.dotfile
+    source ~/.zshrc
 }
 ###############################################################################
 # Git
@@ -105,20 +113,30 @@ alias gsd='gsd(){ git stash drop stash@{$1}; }; gsd'
 alias gdel='git push origin --delete'
 alias glog="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
 
+function cor() {
+	git checkout -b $1 origin/$1
+}
+
+function pushu() {
+	cbranch=$(git symbolic-ref --short HEAD)
+	git push -u origin $cbranch
+}
+
 function git_config() {
-        git config --global user.name "liuyun"
-        git config --global user.email liuyunplus@gmail.com
-        git config --global core.quotepath false
-        git config --global gui.encoding utf-8
-        git config --global i18n.commit.encoding utf-8
-        git config --global i18n.logoutputencoding utf-8
-        git config --global core.pager "less -F -X"
-        git config --global core.editor vim
-        git config --global core.excludesfile ~/.gitignore
-        # Linux
-        export LESSCHARSET=utf-8
-        # Windows
-        set LESSCHARSET=utf-8
+	git config --global user.name "lewis"
+    git config --global user.email lewis.liu@ihr360.com
+	git config --global core.ignorecase false
+    git config --global core.quotepath false
+    git config --global gui.encoding utf-8
+    git config --global i18n.commit.encoding utf-8
+    git config --global i18n.logoutputencoding utf-8
+    git config --global core.pager "less -F -X"
+    git config --global core.editor vim
+    git config --global core.excludesfile ~/.gitignore
+    # Linux
+    export LESSCHARSET=utf-8
+    # Windows
+    set LESSCHARSET=utf-8
 }
 ###############################################################################
 # Maven
@@ -126,7 +144,7 @@ function git_config() {
 alias ml='mvn clean'
 alias mc='mvn compile'
 alias mi='mvn install -Dmaven.test.skip=true'
-
+alias md='mvn deploy'
 alias mdt='mvn dependency:tree'
 alias mds='mvn dependency:sources'
 alias mdc='mvn dependency:copy-dependencies -DincludeScope=runtime'
