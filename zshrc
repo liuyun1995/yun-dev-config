@@ -6,7 +6,6 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-
 export M2_HOME=/opt/apache-maven-3.6.3
 export JAVA_HOME=/opt/jdk1.8.0_251
 export JRE_HOME=${JAVA_HOME}/jre
@@ -16,8 +15,9 @@ export GOROOT=/opt/go
 export GOPATH=$HOME/Public/MyPro/GoPro
 export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin
 
-[ -f $HOME/.dotfile/ssh_login.script ] && . $HOME/.dotfile/ssh_login.script
-[ -f $HOME/.dotfile/create_table.script ] && . $HOME/.dotfile/create_table.script
+for file in $(find $HOME/.dotfile -type f -name \*.dotfile); do
+    . $file
+done
 ###############################################################################
 # Shell Imporvement
 ###############################################################################
@@ -38,7 +38,6 @@ alias vzsh='vim ~/.zshrc'
 alias szsh='source ~/.zshrc'
 alias c='clear'
 alias x='extract'
-alias art='java -jar /opt/Arthas/arthas-boot.jar'
 alias k='k(){lsof -ti:$1 | xargs kill -9}; k'
 
 function open_window() {
@@ -68,9 +67,9 @@ function extract() {
     fi
 }
 
-function copyfile() {
-    [ -f zshrc ] && cp -rf zshrc $HOME/.zshrc
-    [ -f dotfile ] && cp -rf dotfile $HOME/.dotfile
+function sync_config() {
+    [ -f zshrc ] && rm -rf $HOME/.zshrc && cp -rf zshrc $HOME/.zshrc
+    [ -d dotfile ] && rm -rf $HOME/.dotfile && cp -rf dotfile $HOME/.dotfile
     source ~/.zshrc
 }
 ###############################################################################

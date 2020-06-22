@@ -1,4 +1,3 @@
-str=`
 function getUnderScore(str) {
     gsub(/;/,"",str)
     match(str,/(.*)([a-z0-9])([A-Z])(.*)/,cap)
@@ -30,9 +29,4 @@ $0!~/^$|}/{
 
 END{
     printf(") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n")
-}
-`
-
-function cratetable() {
-	awk $str $1
 }

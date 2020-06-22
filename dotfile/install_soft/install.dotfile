@@ -48,5 +48,3 @@ function config_zsh() {
 function config_vim() {
     echo "============ config vim start ============";
 }
-
-min_install

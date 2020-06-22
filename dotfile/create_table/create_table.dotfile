@@ -1,0 +1,3 @@
+function create_table() {
+	awk -f create_table.awk $1
+}

@@ -1,0 +1,17 @@
+[ -f ssh_count ] && . ssh_count
+
+function ssh_login(){
+	expect -c "
+		set timeout 30
+		spawn ssh $2@$1
+		expect \"*password:\"
+		send \"$3\r\"
+		expect \"ubuntu@*\"
+		send \"sudo su\r\"
+		expect \"*password*\"
+		send \"$3\r\"
+		expect \"root*\"
+		send \"alias ku='kubectl'\r\"
+		interact
+	"
+}

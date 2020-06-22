@@ -5,4 +5,4 @@
 .byebug_history
 .env
 .git/
-**/ssh_login.script
+**/ssh_count
