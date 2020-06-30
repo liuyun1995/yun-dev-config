@@ -1,32 +1,55 @@
 function getUnderScore(str) {
-    gsub(/;/,"",str)
-    match(str,/(.*)([a-z0-9])([A-Z])(.*)/,cap)
-    ret = cap[1] cap[2] "_" tolower(cap[3]) cap[4]
-    return ret
+    gsub(/;/, "", str)
+    while(match(str, /[A-Z]/)) {
+        s1 = substr(str, 0, RSTART - 1)
+        s2 = substr(str, RSTART, RLENGTH)
+        s3 = substr(str, RSTART + RLENGTH)
+        if(s2 == "") { continue }
+        if(s1 == "") {
+            str = tolower(s2)s3
+        } else {
+            str = s1"_"tolower(s2)s3
+        }
+    }
+    return str
 }
 
 function getMysqlType(javaType) {
-    switch(javaType) {
-        case /String/ : return "VARCHAR(255)"
-        case /int|Integer/ : return "INT"
-        case /long|Long/ : return "BIGINT"
-        case /boolean|Boolean/ : return "BIT"
-        case /BigDecimal/ : return "DECIMAL"
-        case /Date/ : return "DATE"
+    if(javaType ~ /String/) {
+        return "VARCHAR(255)"
     }
+    if(javaType ~ /int|Integer/) {
+        return "INT"
+    }
+    if(javaType ~ /long|Long/) {
+        return "BIGINT"
+    }
+    if(javaType ~ /boolean|Boolean/) {
+        return "BIT"
+    }
+    if(javaType ~ /BigDecimal/) {
+        return "DECIMAL"
+    }
+    if(javaType ~ /Date/) {
+        return "DATE"
+    }
+    return "NULL"
 }
 
 $0!~/^$|}/{
-    if(match($0,/.*class.*/)) {
+    if(match($0, /.*class.*/)) {
         tableName = getUnderScore($3)
-        printf("CREATE TABLE `%s` (\n", tableName);
+        printf("DROP TABLE `%s`;\n", tableName)
+        printf("CREATE TABLE `%s` (\n", tableName)
     } else {
         columnName = getUnderScore($3)
         columnType = getMysqlType($2)
+        if(key == "") { key = columnName }
         printf("    `%s` %s NOT NULL,\n", columnName, columnType)
     }
 }
 
 END{
+    printf("    PRIMARY KEY (`%s`)\n", key)
     printf(") ENGINE=InnoDB DEFAULT CHARSET=utf8;\n")
 }

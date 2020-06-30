@@ -16,7 +16,7 @@ export GOPATH=$HOME/Public/MyPro/GoPro
 export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin
 
 for file in $(find $HOME/.dotfile -type f -name \*.dotfile); do
-    . $file
+    source $file
 done
 ###############################################################################
 # Shell Imporvement
@@ -71,6 +71,13 @@ function sync_config() {
     [ -f zshrc ] && rm -rf $HOME/.zshrc && cp -rf zshrc $HOME/.zshrc
     [ -d dotfile ] && rm -rf $HOME/.dotfile && cp -rf dotfile $HOME/.dotfile
     source ~/.zshrc
+}
+
+function run() {
+    for file in $(find $HOME/.dotfile -type f -name $1.sh); do
+        chmod +x $file
+        sh $file
+    done
 }
 ###############################################################################
 # Git
