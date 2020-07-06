@@ -1,3 +1,23 @@
+alias dev4='ssh_login 192.168.1.221 ubuntu ubuntu'
+alias qa='ssh_login 192.168.1.184 ubuntu ubuntu'
+alias uat='ssh_login 192.168.1.186 ubuntu ubtun'
+alias beta='ssh_login 192.168.1.181 k8s k8s'
+
+function ssh_login(){
+	expect -c "
+		set timeout 30
+		spawn ssh $2@$1
+		expect \"*password:\"
+		send \"$3\r\"
+		expect \"ubuntu@*\"
+		send \"sudo su\r\"
+		expect \"*password*\"
+		send \"$3\r\"
+		expect \"root*\"
+		send \"alias ku='kubectl'\r\"
+		interact
+	"
+}
 ###############################################################################
 # Env settings
 ###############################################################################
@@ -6,6 +26,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
+export DOT_HOME=$HOME/.dotfile
 export M2_HOME=/opt/apache-maven-3.6.3
 export JAVA_HOME=/opt/jdk1.8.0_251
 export JRE_HOME=${JAVA_HOME}/jre
@@ -13,11 +34,10 @@ export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$M2_HOME/lib
 
 export GOROOT=/opt/go
 export GOPATH=$HOME/Public/MyPro/GoPro
-export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin
+export GOPROXY=https://goproxy.cn
+export GO111MODULE=on
+export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin:$DOT_HOME/bin
 
-for file in $(find $HOME/.dotfile -type f -name \*.dotfile); do
-    source $file
-done
 ###############################################################################
 # Shell Imporvement
 ###############################################################################
@@ -68,6 +88,8 @@ function extract() {
 }
 
 function sync_config() {
+    git_root_path=$(git rev-parse --show-toplevel)
+    cd $git_root_path
     [ -f zshrc ] && rm -rf $HOME/.zshrc && cp -rf zshrc $HOME/.zshrc
     [ -d dotfile ] && rm -rf $HOME/.dotfile && cp -rf dotfile $HOME/.dotfile
     source ~/.zshrc

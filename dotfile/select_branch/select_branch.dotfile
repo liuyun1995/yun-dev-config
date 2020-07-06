@@ -1,6 +1,0 @@
-my_dir1="$(dirname "$0")"
-
-function select_branch() {
-	chmod +x $my_dir1/select_branch.sh
-	sh $my_dir1/select_branch.sh
-}

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+awk -f $DOT_HOME/create_table/create_table.awk $1
