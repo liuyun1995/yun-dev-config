@@ -1,0 +1,3 @@
+alias inst='$TOOLS_HOME/install_soft/install_soft.sh'
+alias bs='$TOOLS_HOME/branch_select/branch_select'
+alias ct='$TOOLS_HOME/create_table/create_table.sh'

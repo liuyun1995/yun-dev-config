@@ -1,16 +1,9 @@
 #!/bin/sh
 
-#最小安装
-function min_install() {
-    install_jdk
-    install_git
-    install_maven
-    config_zsh
-    config_vim
-}
+echo ".......安装脚本"
 
 #安装JDK
-function install_jdk() {
+install_jdk() {
     echo "============ install jdk start ============";
     if [ -x "$(command -v java)" ]; then
         echo "已安装Java"
@@ -20,7 +13,7 @@ function install_jdk() {
 }
 
 #安装Git
-function install_git() {
+install_git() {
     echo "============ install git start ============";
     if [ -x "$(command -v git)" ]; then
         echo "已安装git"
@@ -30,7 +23,7 @@ function install_git() {
 }
 
 #安装Maven
-function install_maven() {
+install_maven() {
     echo "============ install maven start ============";
     if [ -x "$(command -v mvn)" ]; then
         echo "已安装maven"
@@ -40,11 +33,11 @@ function install_maven() {
 }
 
 #配置ZSH
-function config_zsh() {
+config_zsh() {
     echo "============ config zsh start ============";
 }
 
 #配置VIM
-function config_vim() {
+config_vim() {
     echo "============ config vim start ============";
 }

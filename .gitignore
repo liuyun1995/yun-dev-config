@@ -5,4 +5,4 @@
 .byebug_history
 .env
 .git/
-**/ssh_count
+**/ssh_login.alias
