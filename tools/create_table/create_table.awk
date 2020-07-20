@@ -24,6 +24,12 @@ function getMysqlType(javaType) {
     if(javaType ~ /long|Long/) {
         return "BIGINT"
     }
+    if(javaType ~ /float|Float/) {
+        return "FLOAT"
+    }
+    if(javaType ~ /double|Double/) {
+        return "DOUBLE"
+    }
     if(javaType ~ /boolean|Boolean/) {
         return "BIT"
     }
@@ -36,7 +42,7 @@ function getMysqlType(javaType) {
     return "NULL"
 }
 
-$0!~/^$|}/{
+$0~/[a-zA-Z]([a-zA-Z0-9])*/{
     if(match($0, /.*class.*/)) {
         tableName = getUnderScore($3)
         printf("DROP TABLE `%s`;\n", tableName)
