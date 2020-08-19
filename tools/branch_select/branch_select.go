@@ -79,7 +79,7 @@ func main() {
 				fmt.Println(err.Error())
 			}
 			return
-		case keyboard.KeyEsc:
+		case keyboard.KeyCtrlC:
 			return
 		default:
 			break
