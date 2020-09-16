@@ -38,7 +38,7 @@ alias vzsh='vim ~/.zshrc'
 alias szsh='source ~/.zshrc'
 alias c='clear'
 alias x='extract'
-alias k='k(){lsof -ti:$1 | xargs kill -9}; k'
+alias kp='kp(){sudo kill -9 $(sudo lsof -t -i:$1 -sTCP:LISTEN)}; kp'
 
 function open_window() {
     [ "$(uname)" = "Darwin" ] && open $1
