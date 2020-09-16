@@ -41,7 +41,6 @@ func branchShow(currentIndex int) ([]string, int, string) {
 }
 
 func main() {
-	// os.Chdir("/home/lewis/Public/WorkPro/ihr360-kpi")
 	gput.Civis()
 	gput.Sc()
 	branchArray, currentIndex, currentBranch := branchShow(-1)
@@ -78,8 +77,17 @@ func main() {
 			if err != nil {
 				fmt.Println(err.Error())
 			}
+			gput.Cnorm()
+			return
+		case keyboard.KeyCtrlD:
+			err := exec.Command("bash", "-c", "git branch -d "+currentBranch).Run()
+			if err != nil {
+				fmt.Println(err.Error())
+			}
+			gput.Cnorm()
 			return
 		case keyboard.KeyCtrlC:
+			gput.Cnorm()
 			return
 		default:
 			break

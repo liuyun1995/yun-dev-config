@@ -3,21 +3,17 @@
 set host [lindex $argv 0]
 set username [lindex $argv 1]
 set password [lindex $argv 2]
+set bashrc [exec sh -c {cat ${HOME}/.bashrc | base64 -w 0}]
 
 set timeout 30
+log_user 0
+set exp_internal 1
 
 spawn ssh $username@$host
 
-expect "*password:"
-
-send "$password\r"
-
-expect "ubuntu@*"
-
-send "sudo su\r"
-
-expect "*password*"
-
-send "$password\r"
+expect -re ".*password.*" { send "$password\r" }
+expect -re ".*$" { send "sudo su\r" }
+expect -re ".*password.*" { send "$password\r" }
+expect -re ".*#" { send "echo $bashrc | base64 --decode > /tmp/bashrc; bash --rcfile /tmp/bashrc\r" }
 
 interact
