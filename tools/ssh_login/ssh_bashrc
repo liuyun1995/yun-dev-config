@@ -1,0 +1,18 @@
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+
+# 别名定义
+alias ll='ls -alF'
+alias la='ls -A'
+alias c='clear'
+alias date='date +"%Y-%m-%d %H:%M:%S"'
+
+alias dpsg='dpsg(){ docker ps | grep $1; }; dpsg'
+alias dlogs='dlog(){ docker logs -f --tail=500 $1; }; dlog'
+alias dexec='dexec(){ docker exec -it $1 bash; }; dexec'
+
+alias kpo='kpod(){ kubectl -n $1 get pods; }; kpod'
+alias ksvc='ksvc(){ kubectl -n $1 get svc; }; ksvc'
+alias klogs='klog(){ kubectl -n $1 logs -f --tail=500 $2; }; klog'
+alias kexec='kexec(){ kubectl -n $1 exec -it $2 bash; }; kexec'
