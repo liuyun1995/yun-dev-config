@@ -39,6 +39,8 @@ alias szsh='source ~/.zshrc'
 alias c='clear'
 alias x='extract'
 alias kp='kp(){sudo kill -9 $(sudo lsof -t -i:$1 -sTCP:LISTEN)}; kp'
+alias cpy="xclip -selection clipboard"
+alias pwdcp="pwd | xargs echo -n | cpy"
 
 function open_window() {
     [ "$(uname)" = "Darwin" ] && open $1

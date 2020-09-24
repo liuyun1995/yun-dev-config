@@ -13,6 +13,6 @@ expect -re ".*password.*" { send "$password\r" }
 expect -re ".*$" { send "sudo su\r" }
 expect -re ".*password.*" { send "$password\r" }
 expect -re ".*#" { send "echo $bashrc | base64 --decode > /tmp/bashrc; bash --rcfile /tmp/bashrc; rm -rf /tmp/bashrc\r" }
-expect -re ".*#" { send "\r" }
+expect -re ".*#" { send "clear\r" }
 
 interact
