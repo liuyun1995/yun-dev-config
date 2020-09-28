@@ -24,7 +24,6 @@ let mapleader = "\<space>"
 "##############################################################
 call plug#begin()
 
-Plug 'VundleVim/Vundle.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'

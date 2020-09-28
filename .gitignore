@@ -6,3 +6,4 @@
 .env
 .git/
 **/ssh_login.alias
+**/.git

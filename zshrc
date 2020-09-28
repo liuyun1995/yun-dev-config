@@ -36,6 +36,7 @@ alias o.='open_window .'
 alias o..='open_window ..'
 alias vzsh='vim ~/.zshrc'
 alias szsh='source ~/.zshrc'
+alias vimrc='vim ~/.config/nvim/init.vim'
 alias c='clear'
 alias x='extract'
 alias kp='kp(){sudo kill -9 $(sudo lsof -t -i:$1 -sTCP:LISTEN)}; kp'
@@ -69,7 +70,7 @@ function extract() {
     fi
 }
 
-for file in $(find $HOME/.tools -type f -name "*.alias"); do
+for file in $(find $HOME/.tools/ -type f -name "*.alias"); do
     source $file
 done
 ###############################################################################
