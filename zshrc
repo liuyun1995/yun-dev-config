@@ -39,8 +39,8 @@ alias szsh='source ~/.zshrc'
 alias c='clear'
 alias x='extract'
 alias kp='kp(){sudo kill -9 $(sudo lsof -t -i:$1 -sTCP:LISTEN)}; kp'
-alias cpy="xclip -selection clipboard"
-alias pwdcp="pwd | xargs echo -n | cpy"
+alias vim='nvim'
+alias oldvim='\vim'
 
 function open_window() {
     [ "$(uname)" = "Darwin" ] && open $1
@@ -69,12 +69,6 @@ function extract() {
     fi
 }
 
-function sour() {
-    git_root_path=$(git rev-parse --show-toplevel)
-    [ -f $git_root_path/zshrc ] && rm -rf $HOME/.zshrc && cp -rf $git_root_path/zshrc $HOME/.zshrc
-    [ -d $git_root_path/tools ] && rm -rf $HOME/.tools && cp -rf $git_root_path/tools $HOME/.tools
-    source ~/.zshrc
-}
 for file in $(find $HOME/.tools -type f -name "*.alias"); do
     source $file
 done
@@ -90,6 +84,8 @@ alias push='git push origin'
 alias br='git branch'
 alias co='git checkout'
 alias merge='git merge --no-ff'
+alias bs="git branch | fzf --height 40% | sed 's/\*\|\s//g' | xargs git checkout"
+alias bd="git branch | fzf -m --height 40% | sed 's/\*\|\s//g' | xargs git branch -d"
 
 alias rets='git reset --soft'
 alias retm='git reset --mixed'
@@ -113,6 +109,7 @@ alias gss='git stash save'
 alias gsl='git stash list'
 alias gsa='gsa(){ git stash apply stash@{$1}; }; gsa'
 alias gsd='gsd(){ git stash drop stash@{$1}; }; gsd'
+
 
 #删除远程分支或标签
 alias gdel='git push origin --delete'

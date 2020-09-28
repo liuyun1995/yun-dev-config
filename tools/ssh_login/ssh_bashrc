@@ -29,7 +29,10 @@ ddump(){
 ####################################
 # k8s别名
 ####################################
-kpod(){ kubectl -n $1 get pods; }
+kns(){ kubectl get ns; }
+kpods(){ kubectl -n $1 get pods; }
+kpodg(){ kubectl -n $1 get pods | grep $2; }
 ksvc(){ kubectl -n $1 get svc; }
+ksvcg(){ kubectl -n $1 get svc | grep $2; }
 klogs(){ kubectl -n $1 logs -f --tail=500 $2; }
 kexec(){ kubectl -n $1 exec -it $2 bash; }

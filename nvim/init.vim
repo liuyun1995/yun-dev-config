@@ -15,64 +15,79 @@ set nobackup                        " 设置不需要备份文件
 set noswapfile                      " 设置不创建临时交换文件
 set nowritebackup                   " 设置编辑的时候不需要备份文件
 set noundofile                      " 设置不创建撤销文件
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let mapleader = "\<space>"
 "##############################################################
-"# Vundle配置
+"# 插件配置
 "##############################################################
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin()
 
-call vundle#begin()
+Plug 'VundleVim/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
-call vundle#end()
+call plug#end()
 "##############################################################
 "# 快捷键配置
 "##############################################################
+"在行尾插入
+noremap <leader>; $a
+"移动到行首
+noremap <leader>a 0
+"移动到行尾
+noremap <leader>l $
+"水平分屏
+noremap <leader>s :split filename
+"垂直分屏
+noremap <leader>v :vsplit filename
+"向上滚动一屏
+noremap <leader>t <C-b>
+"向下滚动一屏
+noremap <leader>b <C-f>
+"删除至行首
+noremap <leader>da d0
+"删除至行尾
+noremap <leader>dl d$
+"打开/关闭文件浏览器
+noremap <leader>f <ESC>:NERDTreeToggle<CR>
+noremap <leader>pi <ESC>:PlugInstall<CR>
+noremap <leader>pu <ESC>:PlugUpdate<CR>
+noremap <leader>ps <ESC>:PlugStatus<CR>
+noremap <leader>pc <ESC>:PlugClean<CR>
+
+"保存当前的改动
+inoremap <C-s> <ESC>:w<CR>a
+"复制
+nnoremap <C-c> "+y
+"粘贴
+nnoremap <C-v> "+p
+"撤销上次修改
+nnoremap <C-z> u
+inoremap <C-z> <ESC>ui
+"全选
+nnoremap <C-a> ggVG
+"进入普通模式
+inoremap <C-e> <ESC>
+vnoremap <C-e> <ESC>
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 "向右缩进
 nnoremap <tab> V>
 "向左缩进
 nnoremap <s-tab> V<
-"移动到当前行行首
-noremap aa 0
-"移动到当前行行尾
-nnoremap ll $
-"移动到第一行行首
-noremap qq gg
-"移动到最后一行行首
-noremap zz G
-"移动到第一行行尾
-noremap pp gg$
-"移动到最后一行行尾
-noremap mm G$
-
-"删除光标至行首内容
-noremap da d0
-"删除光标至行尾内容
-noremap dl d$
-
-"向上滚动一屏
-nnoremap uu <C-b>
-"向下滚动一屏
-nnoremap nn <C-f>
-"在光标后插入
-nnoremap ; a
-"在行尾插入
-nnoremap <CR><CR> $a
-"保存当前的改动
-inoremap <C-s> <ESC>:w<CR>a
-"撤销上次修改
-noremap <C-z> u
-"不保存退出
-noremap jq <ESC>:q!<CR>
+nnoremap <CR> G
+"光标后插入
+nnoremap ; :
+cnoremap ; <ESC>
+noremap vv <ESC><C-v>
 "保存退出
-noremap jw <ESC>:wq!<CR>
-"进入命令模式
-inoremap je <ESC>
-
-noremap pl <ESC>:PluginList<CR>
-noremap pi <ESC>:PluginInstall<CR>
-noremap pu <ESC>:PluginUpdate<CR>
-noremap ps <ESC>:PluginSearch<CR>
-noremap pc <ESC>:PluginClean<CR>
+noremap ss <ESC>:wq!<CR>
+"不保存退出
+noremap qq <ESC>:q!<CR>
