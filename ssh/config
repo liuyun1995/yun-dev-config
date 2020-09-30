@@ -1,0 +1,18 @@
+Host github.com
+	User git
+    HostName github.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa_github
+    ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p
+
+Host gitee.com
+	User git
+	HostName gitee.com
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_rsa_gitee
+
+Host gitlab.ihr360.com
+	User git
+    HostName gitlab.ihr360.com
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa_ihr360

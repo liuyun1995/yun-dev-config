@@ -16,8 +16,7 @@ export GOROOT=/opt/go
 export GOPATH=$HOME/Public/MyPro/GoPro
 export GOPROXY=https://goproxy.cn
 export GO111MODULE=on
-export PATH=$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin
-
+export PATH="$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin"
 ###############################################################################
 # Shell Imporvement
 ###############################################################################

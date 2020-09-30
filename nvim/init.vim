@@ -33,60 +33,41 @@ call plug#end()
 "##############################################################
 "# 快捷键配置
 "##############################################################
-"在行尾插入
-noremap <leader>; $a
-"移动到行首
-noremap <leader>a 0
-"移动到行尾
-noremap <leader>l $
-"水平分屏
-noremap <leader>s :split filename
-"垂直分屏
-noremap <leader>v :vsplit filename
-"向上滚动一屏
-noremap <leader>t <C-b>
-"向下滚动一屏
-noremap <leader>b <C-f>
-"删除至行首
-noremap <leader>da d0
-"删除至行尾
-noremap <leader>dl d$
-"打开/关闭文件浏览器
-noremap <leader>f <ESC>:NERDTreeToggle<CR>
-noremap <leader>pi <ESC>:PlugInstall<CR>
-noremap <leader>pu <ESC>:PlugUpdate<CR>
-noremap <leader>ps <ESC>:PlugStatus<CR>
-noremap <leader>pc <ESC>:PlugClean<CR>
+noremap <leader>; $a|                                "在行尾插入
+noremap <leader>a 0|                                 "移动到行首
+noremap <leader>l $|                                 "移动到行尾
+noremap <leader>s :split filename|                   "水平分屏
+noremap <leader>v :vsplit filename|                  "垂直分屏
+noremap <leader>t <C-b>|                             "向上滚动一屏
+noremap <leader>b <C-f>|                             "向下滚动一屏
+noremap <leader>da d0|                               "删除至行首
+noremap <leader>dl d$|                               "删除至行尾
+noremap <leader>c dG                                 "清空文本
+noremap <leader>/ <ESC>:nohl<CR>|                    "搜索取消高亮
+noremap <leader>f <ESC>:NERDTreeToggle<CR>|          "打开/关闭文件浏览器
+noremap <leader>pi <ESC>:PlugInstall<CR>|            "安装插件
+noremap <leader>pu <ESC>:PlugUpdate<CR>|             "更新插件
+noremap <leader>ps <ESC>:PlugStatus<CR>|             "查看插件安装状态
+noremap <leader>pc <ESC>:PlugClean<CR>|              "清除不在配置文件的插件
 
-"保存当前的改动
-inoremap <C-s> <ESC>:w<CR>a
-"复制
-nnoremap <C-c> "+y
-"粘贴
-nnoremap <C-v> "+p
-"撤销上次修改
-nnoremap <C-z> u
-inoremap <C-z> <ESC>ui
-"全选
-nnoremap <C-a> ggVG
-"进入普通模式
-inoremap <C-e> <ESC>
-vnoremap <C-e> <ESC>
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+inoremap <C-s> <ESC>:w<CR>a|                         "保存当前的改动
+nnoremap <C-c> "+y|                                  "复制
+nnoremap <C-v> "+p|                                  "粘贴
+nnoremap <C-z> u|                                    "撤销上次修改
+inoremap <C-z> <ESC>ui|                              "撤销上次修改
+nnoremap <C-a> ggVG|                                 "全选
+inoremap <C-e> <ESC>|                                "进入普通模式
+vnoremap <C-e> <ESC>|                                "进入普通模式
+noremap <C-h> <C-w>h|                                "光标移至左边屏幕
+noremap <C-j> <C-w>j|                                "光标移至下边屏幕
+noremap <C-k> <C-w>k|                                "光标移至上边屏幕
+noremap <C-l> <C-w>l|                                "光标移至右边屏幕
 
-"向右缩进
-nnoremap <tab> V>
-"向左缩进
-nnoremap <s-tab> V<
-nnoremap <CR> G
-"光标后插入
-nnoremap ; :
-cnoremap ; <ESC>
-noremap vv <ESC><C-v>
-"保存退出
-noremap ss <ESC>:wq!<CR>
-"不保存退出
-noremap qq <ESC>:q!<CR>
+nnoremap <tab> V>|                                   "向右缩进
+nnoremap <s-tab> V<|                                 "向左缩进
+nnoremap <CR> G|                                     "到最后一行
+nnoremap ; :|                                        "进入命令模式
+cnoremap ; <ESC>|                                    "退出命令模式
+noremap vv <ESC><C-v>|                               "进入可视模式
+noremap ss <ESC>:wq!<CR>|                            "保存退出
+noremap qq <ESC>:q!<CR>|                             "不保存退出
