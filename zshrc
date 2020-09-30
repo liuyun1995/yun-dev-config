@@ -1,7 +1,7 @@
 ###############################################################################
 # Env settings
 ###############################################################################
-export ZSH="/home/lewis/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
@@ -38,9 +38,14 @@ alias szsh='source ~/.zshrc'
 alias vimrc='vim ~/.config/nvim/init.vim'
 alias c='clear'
 alias x='extract'
-alias kp='kp(){sudo kill -9 $(sudo lsof -t -i:$1 -sTCP:LISTEN)}; kp'
 alias vim='nvim'
 alias oldvim='\vim'
+
+function kp() {
+	list=$(sudo lsof -i -sTCP:LISTEN);
+	PID=$(echo $list | fzf | awk '{print $2}');
+	[ -n "$PID" ] && sudo kill -9 $PID;
+}
 
 function open_window() {
     [ "$(uname)" = "Darwin" ] && open $1
