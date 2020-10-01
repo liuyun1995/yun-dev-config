@@ -20,14 +20,17 @@ export PATH="$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin"
 ###############################################################################
 # Shell Imporvement
 ###############################################################################
+mac() { [ "$(uname)" = "Darwin" ] && return 0; return 1; }
+linux() { [ "$(expr $(uname -s) | cut -c 1-5)" = "Linux" ] && return 0; return 1; }
+windows() { [ "$(expr $(uname -s) | cut -c 1-10)" = "MINGW32_NT" ] && return 0; return 1; }
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias ls='ls --color=auto'
+alias ls='_ls() { (mac && \ls -G $@) || (linux && \ls --color=auto $@) }; _ls'
 alias ll='ls -lh'
 alias lls='ll -Sr'
+alias llr='ll -tr'
 alias lla='ls -la'
-alias llt='ll -tr'
 alias du='du -h'
 alias df='df -h'
 alias o='open_window'
@@ -41,19 +44,19 @@ alias x='extract'
 alias vim='nvim'
 alias oldvim='\vim'
 
-function kp() {
+kp() {
 	list=$(sudo lsof -i -sTCP:LISTEN);
 	PID=$(echo $list | fzf | awk '{print $2}');
 	[ -n "$PID" ] && sudo kill -9 $PID;
 }
 
-function open_window() {
-    [ "$(uname)" = "Darwin" ] && open $1
-    [ "$(expr substr $(uname -s) 1 5)" = "Linux" ] && nautilus $1
-    [ "$(expr substr $(uname -s) 1 10)" = "MINGW32_NT" ] && explorer $1
+open_window() {
+    mac && open $1;
+    linux && nautilus $1;
+    windows && explorer $1;
 }
 
-function extract() {
+extract() {
     if [ -f $1 ] ; then
                 case $1 in
                         *.tar.bz2) tar xjf $1     ;;
