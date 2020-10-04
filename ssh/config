@@ -3,7 +3,7 @@ Host github.com
     HostName github.com
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa_github
-    ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p
+    ProxyCommand nc -X 5 -x 127.0.0.1:1081 %h %p
 
 Host gitee.com
 	User git

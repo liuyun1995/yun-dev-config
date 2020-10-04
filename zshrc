@@ -206,3 +206,6 @@ alias dksh='docker search'
 ###############################################################################
 alias gr='go run'
 alias gb='go build'
+
+alias python='~/.pyenv/bin/python'
+alias pip='~/.pyenv/bin/python -m pip'
