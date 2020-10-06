@@ -18,28 +18,30 @@ set nowritebackup                                " 设置编辑的时候不需�
 set noundofile                                   " 设置不创建撤销文件
 set relativenumber                               " 设置相对行号
 set mouse=a                                      " 打开鼠标操作
+set showtabline=2
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let mapleader = "\<space>"
-
 "##############################################################
 "# 插件配置
 "##############################################################
 call plug#begin()
 
+Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'morhetz/gruvbox'
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 "##############################################################
 "# 快捷键配置
 "##############################################################
-noremap <leader>s :below split term://zsh<CR>|       "水平分屏
-noremap <leader>v :right split term://zsh<CR>|       "垂直分屏
+noremap <leader>s :below split term://zsh<CR>i|       "水平分屏
+noremap <leader>v :right split term://zsh<CR>i|       "垂直分屏
 noremap <leader>t <C-b>|                             "向上滚动一屏
 noremap <leader>b <C-f>|                             "向下滚动一屏
 noremap <leader>c dG                                 "清空文本
@@ -59,10 +61,6 @@ nnoremap <C-a> ggVG|                                 "全选
 inoremap <C-e> <ESC>|                                "进入普通模式
 vnoremap <C-e> <ESC>|                                "进入普通模式
 tnoremap <C-e> <C-\><C-n>|                           "进入普通模式
-noremap <C-h> <C-w>h|                                "光标移至左边屏幕
-noremap <C-j> <C-w>j|                                "光标移至下边屏幕
-noremap <C-k> <C-w>k|                                "光标移至上边屏幕
-noremap <C-l> <C-w>l|                                "光标移至右边屏幕
 
 nnoremap <tab> V>|                                   "向右缩进
 nnoremap <s-tab> V<|                                 "向左缩进
@@ -72,11 +70,19 @@ cnoremap ; <ESC>|                                    "退出命令模式
 noremap vv <ESC><C-v>|                               "进入可视模式
 noremap ss <ESC>:wq!<CR>|                            "保存退出
 noremap qq <ESC>:q!<CR>|                             "不保存退出
-noremap gl $|                                        "移动至行尾
-noremap gh 0|                                        "移动至行首
-noremap gj L|                                        "移动至页尾
-noremap gk H|                                        "移动至页首
-noremap gt gg|                                       "移动至首行
-noremap gb G|                                        "移动至尾行
-vnoremap J :m '>+1<CR>gv=gv                          "向下移动整行
-vnoremap K :m '<-2<CR>gv=gv                          "向上移动整行
+noremap rh 0|                                        "光标移动至行首
+noremap rl $|                                        "光标移动至行尾
+noremap rk H|                                        "光标移动至页首
+noremap rj L|                                        "光标移动至页尾
+noremap wh <C-w>h|                                   "光标移至左边屏幕
+noremap wl <C-w>l|                                   "光标移至右边屏幕
+noremap wk <C-w>k|                                   "光标移至上边屏幕
+noremap wj <C-w>j|                                   "光标移至下边屏幕
+noremap th <ESC>:tabnext<CR>|                        "移动至下一Tab页
+noremap tl <ESC>:tabprevious<CR>|                    "移动至上一Tab页
+vnoremap J :m '>+1<CR>gv=gv|                         "向下移动整行
+vnoremap K :m '<-2<CR>gv=gv|                         "向上移动整行
+noremap f <Plug>Sneak_s
+noremap F <Plug>Sneak_S
+noremap n <Plug>Sneak_;
+noremap N <Plug>Sneak_,

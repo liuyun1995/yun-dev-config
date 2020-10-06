@@ -1,9 +1,8 @@
-*.pyc
-*.sw[nop]
-.DS_Store
+**/*.pyc
+**/*.sw[nop]
+**/.DS_Store
 .bundle
 .byebug_history
 .env
-.git/
 **/ssh_login.alias
-**/**/.git/
+**/.git/
