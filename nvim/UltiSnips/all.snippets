@@ -2,10 +2,10 @@ snippet date "YYYY-MM-DD"
 `!v strftime("%Y-%m-%d")`
 endsnippet
 
-snippet datetime "YYYY-MM-DD hh:mm:"
+snippet datetime "YYYY-MM-DD hh:mm:ss"
 `!v strftime("%Y-%m-%d %H:%M:%S")`
 endsnippet
 
-snippet uuid "Random UUID"
+snippet uuid
 `!p if not snip.c: import uuid; snip.rv = uuid.uuid4()`
 endsnippet

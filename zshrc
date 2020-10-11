@@ -43,6 +43,7 @@ alias c='clear'
 alias x='extract'
 alias vim='nvim'
 alias oldvim='\vim'
+alias snip='cd ~/.config/nvim/UltiSnips'
 
 kp() {
 	list=$(sudo lsof -i -sTCP:LISTEN);

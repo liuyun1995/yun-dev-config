@@ -1,21 +1,46 @@
-snippet bash
+snippet tmpl
 #!/bin/bash
+$0
+endsnippet
+
+snippet func
+$1() {
+	$0
+}
 endsnippet
 
 snippet if
-if [[ ${1:condition} ]]; then
-	${2:#statements}
+if [[ $1 ]]; then
+	$2
 fi
 endsnippet
 
-snippet for
-for (( ${2:i} = 0; $2 < ${1:count}; $2++ )); do
-	${3:#statements}
+snippet if2
+if [[ $1 ]]; then
+	$2
+else
+	$3
+fi
+endsnippet
+
+snippet if3
+if [[ $1 ]]; then
+	$2
+elif [[ $3 ]]; then
+	$4
+else
+	$5
+fi
+endsnippet
+
+snippet fori
+for (( i = 0; i < $1; i++ )); do
+	$2
 done
 endsnippet
 
-snippet wh
-while [[ ${1:condition} ]]; do
-	${2:#statements}
+snippet while
+while [[ $1 ]]; do
+	$2
 done
 endsnippet
