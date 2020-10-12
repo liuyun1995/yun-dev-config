@@ -1,0 +1,20 @@
+snippet table
+CREATE TABLE IF NOT EXISTS \`$1\`(
+   \`id\` INT UNSIGNED AUTO_INCREMENT COMMENT '主键ID',
+   \`$2\` VARCHAR(100) NOT NULL COMMENT '$3',
+   $0
+   PRIMARY KEY (\`id\`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='$4';
+endsnippet
+
+snippet ins
+INSERT INTO $1 ($2) VALUES ($3);
+endsnippet
+
+snippet upd
+UPDATE $1 SET $2 WHERE $3;
+endsnippet
+
+snippet del
+DELETE FROM $1 WHERE $2;
+endsnippet

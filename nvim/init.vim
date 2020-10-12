@@ -88,13 +88,16 @@ noremap <leader>pc <ESC>:PlugClean<CR>|              "清除不在配置文件�
 
 nnoremap <C-s> <ESC>:w<CR>|                          "保存当前的改动
 inoremap <C-s> <ESC>:w<CR>a|                         "保存当前的改动
-vnoremap <C-c> "+y|                                  "复制
-inoremap <C-v> <ESC>"+gpa|                           "粘贴
+vnoremap <C-c> "+y|                                  "复制(选择模式)
+inoremap <C-v> <ESC>"+gpa|                           "粘贴(插入模式)
+cnoremap <C-v> <C-r>+|                               "粘贴(命令模式)
 nnoremap <C-z> u|                                    "撤销上次修改
 inoremap <C-z> <ESC>ui|                              "撤销上次修改
 nnoremap <C-a> ggVG|                                 "全选
+inoremap <C-a> <ESC>ggVG|                            "全选
 inoremap <C-e> <ESC>|                                "进入普通模式
 vnoremap <C-e> <ESC>|                                "进入普通模式
+cnoremap <C-e> <ESC>|                                "进入普通模式
 tnoremap <C-e> <C-\><C-n>|                           "进入普通模式
 nnoremap <C-j> :m .+1<CR>==|                         "向下移动整行
 nnoremap <C-k> :m .-2<CR>==|                         "向上移动整行
@@ -123,10 +126,6 @@ noremap tn <ESC>:tab new default<CR>|                "新建标签页
 noremap th <ESC>:tabprevious<CR>|                    "移动至上一个标签页
 noremap tl <ESC>:tabnext<CR>|                        "移动至下一个标签页
 noremap to <ESC>:tabonly<CR>|                        "只保留当前标签页
-noremap f <Plug>Sneak_s
-noremap F <Plug>Sneak_S
-noremap n <Plug>Sneak_;
-noremap N <Plug>Sneak_,
 
 map <F5> :call CompileRunGcc()<CR>
 

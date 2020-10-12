@@ -124,16 +124,16 @@ alias gsd='gsd(){ git stash drop stash@{$1}; }; gsd'
 alias gdel='git push origin --delete'
 alias glog="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
 
-function cor() {
+cor() {
 	git checkout -b $1 origin/$1
 }
 
-function pushu() {
+pushu() {
 	cbranch=$(git symbolic-ref --short HEAD)
 	git push -u origin $cbranch
 }
 
-function git_config() {
+git_config() {
 	git config --global user.name "lewis"
     git config --global user.email lewis.liu@ihr360.com
 	git config --global core.ignorecase false
@@ -205,8 +205,8 @@ alias dksh='docker search'
 ###############################################################################
 # Go
 ###############################################################################
-alias gr='go run'
 alias gb='go build'
+alias gr='go run'
 
 alias python='~/.pyenv/bin/python'
 alias pip='~/.pyenv/bin/python -m pip'

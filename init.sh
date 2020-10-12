@@ -1,19 +1,47 @@
-#!/bin/sh
+#!/bin/bash
 
 path=$(pwd)
 
-rm -rf ~/.config/nvim
-rm -rf ~/.zshrc
-rm -rf ~/.tools
-rm -rf ~/.pip
-rm -rf ~/.ssh/config
-rm -rf ~/.latexmkrc
+config_zsh() {
+	rm -rf ~/.zshrc
+	ln -sf $path/zshrc ~/.zshrc
+}
 
-ln -sf $path/nvim ~/.config/nvim
-ln -sf $path/zshrc ~/.zshrc
-ln -sf $path/tools ~/.tools
-ln -sf $path/python/pip ~/.pip
-ln -sf $path/ssh/config ~/.ssh/config
-ln -sf $path/latex/latexmkrc ~/.latexmkrc
+config_vim() {
+	rm -rf ~/.config/nvim
+	ln -sf $path/nvim ~/.config/nvim
+}
 
+config_git() {
+	rm -rf ~/.gitconfig
+	ln -sf $path/git/gitconfig ~/.gitconfig
+}
+
+config_ssh() {
+	rm -rf ~/.ssh/config
+	ln -sf $path/ssh/config ~/.ssh/config
+}
+
+config_python() {
+	rm -rf ~/.pip
+	ln -sf $path/python/pip ~/.pip
+}
+
+config_latexmkrc() {
+	rm -rf ~/.latexmkrc
+	ln -sf $path/latex/latexmkrc ~/.latexmkrc
+}
+
+config_tools() {
+	rm -rf ~/.tools
+	ln -sf $path/tools ~/.tools
+}
+
+config_zsh
+config_vim
+config_git
+config_ssh
+config_python
+config_latexmkrc
+config_tools
 echo "配置成功！"

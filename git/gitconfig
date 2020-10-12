@@ -1,0 +1,15 @@
+[core]
+	ignorecase = false
+	quotepath = false
+	pager = less -F -X
+	editor = vim
+	excludesfile = ~/.gitignore
+[gui]
+	encoding = utf-8
+[i18n "commit"]
+	encoding = utf-8
+[i18n]
+	logoutputencoding = utf-8
+[user]
+	name = liuyun
+	email = liuyunplus@gmail.com
