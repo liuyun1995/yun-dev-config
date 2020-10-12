@@ -14,7 +14,9 @@ config_vim() {
 
 config_git() {
 	rm -rf ~/.gitconfig
+	rm -rf ~/.gitignore
 	ln -sf $path/git/gitconfig ~/.gitconfig
+	ln -sf $path/git/gitignore ~/.gitignore
 }
 
 config_ssh() {
