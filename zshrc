@@ -45,6 +45,11 @@ alias vim='nvim'
 alias oldvim='\vim'
 alias snip='cd ~/.config/nvim/UltiSnips'
 
+ip() {
+	(mac || linux) && ifconfig | grep -e '.*192\.168.*';
+	windows && ipconfig | grep -e '.*192\.168.*';
+}
+
 kp() {
 	list=$(sudo lsof -i -sTCP:LISTEN);
 	PID=$(echo $list | fzf | awk '{print $2}');
