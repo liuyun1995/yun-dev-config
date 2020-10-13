@@ -126,6 +126,7 @@ noremap tn <ESC>:tab new default<CR>|                "新建标签页
 noremap th <ESC>:tabprevious<CR>|                    "移动至上一个标签页
 noremap tl <ESC>:tabnext<CR>|                        "移动至下一个标签页
 noremap to <ESC>:tabonly<CR>|                        "只保留当前标签页
+noremap fc <ESC>:1,$!column -t<CR>|
 
 map <F5> :call CompileRunGcc()<CR>
 
