@@ -5,4 +5,4 @@
 .byebug_history
 .env
 **/ssh_login.alias
-**/.git/
+**/nvim/plugged
