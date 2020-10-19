@@ -164,13 +164,7 @@ alias md='mvn deploy'
 alias mdt='mvn dependency:tree'
 alias mds='mvn dependency:sources'
 alias mdc='mvn dependency:copy-dependencies -DincludeScope=runtime'
-
-function clean_repo() {
-        maven_repo = '~/.m2'
-        find $maven_repo -name '*.lastUpdated' | xargs rm -rf
-        [ $1 ] && find $maven_repo -name *$1* | xargs rm -rf
-        echo 'Clean Maven Success!'
-}
+alias mcr='find ~/.m2 -name "*.lastUpdated" | xargs rm -rf'
 ###############################################################################
 # Docker
 ###############################################################################

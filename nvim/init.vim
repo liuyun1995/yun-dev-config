@@ -27,6 +27,16 @@ let mapleader = "\<space>"                             " 设置leader键为空�
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
+" Coc配置
+let g:coc_global_extensions = [
+      \'coc-html',
+      \'coc-css',
+	  \'coc-python',
+	  \'coc-go',
+      \'coc-sql',
+      \'coc-highlight',
+      \]
+
 " vimtex配置
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = 'skim'
@@ -98,7 +108,6 @@ nnoremap <C-a> ggVG|                                                 "全选
 inoremap <C-a> <ESC>ggVG|                                            "全选
 inoremap <C-e> <ESC>|                                                "进入普通模式
 vnoremap <C-e> <ESC>|                                                "进入普通模式
-cnoremap <C-e> <ESC>|                                                "进入普通模式
 tnoremap <C-e> <C-\><C-n>|                                           "进入普通模式
 nnoremap <C-j> :m .+1<CR>==|                                         "向下移动整行
 nnoremap <C-k> :m .-2<CR>==|                                         "向上移动整行
@@ -106,15 +115,16 @@ inoremap <C-j> <Esc>:m .+1<CR>==gi|                                  "向下移�
 inoremap <C-k> <Esc>:m .-2<CR>==gi|                                  "向上移动整行
 vnoremap <C-j> :m '>+1<CR>gv=gv|                                     "向下移动整行
 vnoremap <C-k> :m '<-2<CR>gv=gv|                                     "向上移动整行
+cnoremap <C-a> <C-B>|                                                "光标移动至命令的起始
 
-nnoremap <tab> V>|                                                   "向右缩进
-nnoremap <s-tab> V<|                                                 "向左缩进
+inoremap <tab> V>|                                                   "向右缩进
+inoremap <s-tab> <ESC>V<i|                                                 "向左缩进
 nnoremap <CR> G|                                                     "到最后一行
 nnoremap ; :|                                                        "进入命令模式
 cnoremap ; <ESC>|                                                    "退出命令模式
 noremap ss <ESC>:wq!<CR>|                                            "保存退出
 noremap qq <ESC>:q!<CR>|                                             "不保存退出
-noremap rh 0|                                                        "光标移动至行首
+noremap rh ^|                                                        "光标移动至行首
 noremap rl $|                                                        "光标移动至行尾
 noremap rk H|                                                        "光标移动至页首
 noremap rj L|                                                        "光标移动至页尾
@@ -128,7 +138,6 @@ noremap th <ESC>:tabprevious<CR>|                                    "移动至�
 noremap tl <ESC>:tabnext<CR>|                                        "移动至下一个标签页
 noremap to <ESC>:tabonly<CR>|                                        "只保留当前标签页
 noremap fc <ESC>:1,$!column -t<CR>|
-
 
 noremap <F2> <ESC>:set cursorline! cursorcolumn!<CR>|                "当前行列突出显示开关
 noremap <F3> <ESC>:set relativenumber!<CR>|                          "相对行号显示开关
