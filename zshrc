@@ -44,6 +44,7 @@ alias x='extract'
 alias vim='nvim'
 alias oldvim='\vim'
 alias snip='cd ~/.config/nvim/UltiSnips'
+alias upimg='~/.yun-notes-image/upload.sh'
 
 ip() {
 	(mac || linux) && ifconfig | grep -e '.*192\.168.*';
@@ -98,8 +99,8 @@ alias push='git push origin'
 alias br='git branch'
 alias co='git checkout'
 alias merge='git merge --no-ff'
-alias bs="git branch | fzf --height 40% | sed 's/\*\|\s//g' | xargs git checkout"
-alias bd="git branch | fzf -m --height 40% | sed 's/\*\|\s//g' | xargs git branch -d"
+alias bs="git branch | fzf --height 80% | sed 's/\*\|\s//g' | xargs git checkout"
+alias bd="git branch | fzf -m --height 80% | sed 's/\*\|\s//g' | xargs git branch -D"
 
 alias rets='git reset --soft'
 alias retm='git reset --mixed'

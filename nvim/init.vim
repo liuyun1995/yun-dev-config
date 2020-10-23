@@ -116,12 +116,19 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi|                                  "向上移�
 vnoremap <C-j> :m '>+1<CR>gv=gv|                                     "向下移动整行
 vnoremap <C-k> :m '<-2<CR>gv=gv|                                     "向上移动整行
 cnoremap <C-a> <C-B>|                                                "光标移动至命令的起始
+nnoremap <C-x> 0D"_dd|
+nnoremap <C-d> ^vg_"+yo<ESC>"+gp|
 
-inoremap <tab> V>|                                                   "向右缩进
-inoremap <s-tab> <ESC>V<i|                                                 "向左缩进
+nnoremap <tab> V>|                                                   "向右缩进
+nnoremap <s-tab> V<|                                                 "向左缩进
+inoremap <s-tab> <ESC>V<i|                                           "向左缩进
 nnoremap <CR> G|                                                     "到最后一行
 nnoremap ; :|                                                        "进入命令模式
+vnoremap ; :|                                                        "进入命令模式
 cnoremap ; <ESC>|                                                    "退出命令模式
+
+nnoremap d "_d|
+nnoremap dd "_dd|
 noremap ss <ESC>:wq!<CR>|                                            "保存退出
 noremap qq <ESC>:q!<CR>|                                             "不保存退出
 noremap rh ^|                                                        "光标移动至行首
@@ -144,6 +151,17 @@ noremap <F3> <ESC>:set relativenumber!<CR>|                          "相对行�
 noremap <F4> <ESC>:set wrap! wrap?<CR>|                              "是否折行开关
 noremap <F5> <ESC>:call CompileAndRun()<CR>|                         "执行当前文件
 
+autocmd FileType vim nnoremap <buffer> <C-_> <ESC>:call Annotation("\"", "")<CR>|
+autocmd FileType vim vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("\"", "")<CR>|
+autocmd FileType html nnoremap <buffer> <C-_> <ESC>:call Annotation("<!--", "-->")<CR>|
+autocmd FileType html vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("<!--", "-->")<CR>|
+autocmd FileType sql nnoremap <buffer> <C-_> <ESC>:call Annotation("--", "")<CR>|
+autocmd FileType sql vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("--", "")<CR>|
+autocmd FileType sh nnoremap <buffer> <C-_> <ESC>:call Annotation("#", "")<CR>|
+autocmd FileType sh vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("#", "")<CR>|
+autocmd FileType python nnoremap <buffer> <C-_> <ESC>:call Annotation("#", "")<CR>|
+autocmd FileType python vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("#", "")<CR>|
+
 function CompileAndRun()
 	exec "w"
 	if &filetype == 'sh'
@@ -156,5 +174,20 @@ function CompileAndRun()
 	elseif &filetype == 'go'
 		exec "!go build %<"
 		exec "!go run %"
+	endif
+endfunction
+
+function Annotation(start, end)
+	let s:line = getline(".")
+	if s:line =~ "^".a:start.".*".a:end."\\s*$"
+		exec "s/^\\s*".a:start."\\s//"
+		if a:end != ""
+			exec "s/\\s\*".a:end."\\s*$//"
+		endif
+	else
+		exec "normal 0i".a:start." "
+		if a:end != ""
+			exec "normal $a ".a:end
+		endif
 	endif
 endfunction
