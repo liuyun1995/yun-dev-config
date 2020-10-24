@@ -66,15 +66,17 @@ inoremap <C-a> <ESC>ggVG|                                                       
 inoremap <C-e> <ESC>|                                                                 "进入普通模式
 vnoremap <C-e> <ESC>|                                                                 "进入普通模式
 tnoremap <C-e> <C-\><C-n>|                                                            "进入普通模式
-nnoremap <C-j> :m .+1<CR>==|                                                          "向下移动整行
-nnoremap <C-k> :m .-2<CR>==|                                                          "向上移动整行
-inoremap <C-j> <Esc>:m .+1<CR>==gi|                                                   "向下移动整行
-inoremap <C-k> <Esc>:m .-2<CR>==gi|                                                   "向上移动整行
-vnoremap <C-j> :m '>+1<CR>gv=gv|                                                      "向下移动整行
-vnoremap <C-k> :m '<-2<CR>gv=gv|                                                      "向上移动整行
 cnoremap <C-a> <C-B>|                                                                 "光标移动至命令的起始
 nnoremap <C-x> 0D"_dd|                                                                "剪切当前行
 nnoremap <C-d> 0v$h"+yo<ESC>"+gp|                                                     "将当前行复制到下一行
+
+nnoremap <C-j> :m .+1<CR>==|                                                          "向下移动整行
+inoremap <C-j> <Esc>:m .+1<CR>==gi|                                                   "向下移动整行
+vnoremap <C-j> :m '>+1<CR>gv=gv|                                                      "向下移动整行
+
+nnoremap <C-k> :m .-2<CR>==|                                                          "向上移动整行
+inoremap <C-k> <Esc>:m .-2<CR>==gi|                                                   "向上移动整行
+vnoremap <C-k> :m '<-2<CR>gv=gv|                                                      "向上移动整行
 
 nnoremap <tab> V>|                                                                    "向右缩进
 nnoremap <s-tab> V<|                                                                  "向左缩进
@@ -86,25 +88,28 @@ cnoremap ; <ESC>|                                                               
 nnoremap dd "_dd|                                                                     "删除一行
 noremap ss <ESC>:wq!<CR>|                                                             "保存退出
 noremap qq <ESC>:q!<CR>|                                                              "不保存退出
+
 noremap rh ^|                                                                         "光标移动至行首
 noremap rl $|                                                                         "光标移动至行尾
 noremap rk H|                                                                         "光标移动至页首
 noremap rj L|                                                                         "光标移动至页尾
+
 noremap wh <C-w>h|                                                                    "光标移至左边屏幕
 noremap wl <C-w>l|                                                                    "光标移至右边屏幕
 noremap wk <C-w>k|                                                                    "光标移至上边屏幕
 noremap wj <C-w>j|                                                                    "光标移至下边屏幕
 noremap wo <C-w>o|                                                                    "关闭除当前窗口的其他窗口
+
 noremap tn <ESC>:tab new default<CR>|                                                 "新建标签页
 noremap th <ESC>:tabprevious<CR>|                                                     "移动至上一个标签页
 noremap tl <ESC>:tabnext<CR>|                                                         "移动至下一个标签页
 noremap to <ESC>:tabonly<CR>|                                                         "只保留当前标签页
 noremap fc <ESC>:1,$!column -t<CR>|
 
-noremap <F2> <ESC>:set cursorline! cursorcolumn!<CR>|                                 "当前行列突出显示开关
+noremap <F1> <ESC>:set cursorline! cursorcolumn!<CR>|                                 "当前行列突出显示开关
+noremap <F2> <ESC>:set wrap! wrap?<CR>|                                               "是否自动换行开关
 noremap <F3> <ESC>:set relativenumber!<CR>|                                           "相对行号显示开关
-noremap <F4> <ESC>:set wrap! wrap?<CR>|                                               "是否折行开关
-noremap <F5> <ESC>:call CompileAndRun()<CR>|                                          "执行当前文件
+noremap <F4> <ESC>:call CompileAndRun()<CR>|                                          "执行当前文件
 "##############################################################
 "# 自定义函数
 "##############################################################
