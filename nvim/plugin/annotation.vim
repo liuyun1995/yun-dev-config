@@ -8,6 +8,8 @@ autocmd FileType sh nnoremap <buffer> <C-_> <ESC>:call Annotation("#", "")<CR>|
 autocmd FileType sh vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("#", "")<CR>|
 autocmd FileType python nnoremap <buffer> <C-_> <ESC>:call Annotation("#", "")<CR>|
 autocmd FileType python vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("#", "")<CR>|
+autocmd FileType go nnoremap <buffer> <C-_> <ESC>:call Annotation("//", "")<CR>|
+autocmd FileType go vnoremap <buffer> <C-_> <ESC>:'<,'>call Annotation("//", "")<CR>|
 
 function Annotation(start, end)
 	let s:line = getline(".")
