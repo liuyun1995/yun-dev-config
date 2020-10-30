@@ -42,12 +42,8 @@ call plug#end()
 "##############################################################
 "# 快捷键配置
 "##############################################################
-noremap <leader>s :below split term://zsh<CR>i|                                       "水平分屏
-noremap <leader>v :right split term://zsh<CR>i|                                       "垂直分屏
-noremap <leader>t <C-b>|                                                              "向上滚动一屏
-noremap <leader>b <C-f>|                                                              "向下滚动一屏
-noremap <leader>c ggVGd|                                                              "清空文本
-noremap <leader>/ <ESC>:nohl<CR>|                                                     "搜索取消高亮
+noremap <leader>t :below split term://zsh<CR>i|                                       "水平分屏
+noremap <leader>c ggVG"_d|                                                            "清空文本
 noremap <leader>f <ESC>:NERDTreeToggle<CR>|                                           "打开/关闭文件浏览器
 noremap <leader>pi <ESC>:PlugInstall<CR>|                                             "安装插件
 noremap <leader>pu <ESC>:PlugUpdate<CR>|                                              "更新插件
@@ -56,8 +52,9 @@ noremap <leader>pc <ESC>:PlugClean<CR>|                                         
 
 nnoremap <C-s> <ESC>:w<CR>|                                                           "保存当前的改动
 inoremap <C-s> <ESC>:w<CR>a|                                                          "保存当前的改动
-vnoremap <C-c> "+y|                                                                   "复制(选择模式)
-inoremap <C-v> <ESC>"+gpa|                                                            "粘贴(插入模式)
+nnoremap <C-c> m`0v$h"+y``|                                                           "复制当前行
+vnoremap <C-c> "+y|                                                                   "复制当前选择块
+inoremap <C-v> <ESC>"+pa|                                                             "粘贴(插入模式)
 cnoremap <C-v> <C-r>+|                                                                "粘贴(命令模式)
 nnoremap <C-z> u|                                                                     "撤销上次修改
 inoremap <C-z> <ESC>ui|                                                               "撤销上次修改
@@ -78,13 +75,14 @@ nnoremap <C-k> :m .-2<CR>==|                                                    
 inoremap <C-k> <Esc>:m .-2<CR>==gi|                                                   "向上移动整行
 vnoremap <C-k> :m '<-2<CR>gv=gv|                                                      "向上移动整行
 
-nnoremap <tab> V>|                                                                    "向右缩进
-nnoremap <s-tab> V<|                                                                  "向左缩进
-inoremap <s-tab> <ESC>V<i|                                                            "向左缩进
-nnoremap <CR> G|                                                                      "到最后一行
+nnoremap > v>|                                                                        "向右缩进
+vnoremap > >gv|                                                                       "向右缩进
+nnoremap < v<|                                                                        "向左缩进
+vnoremap < <gv|                                                                       "向左缩进
 nnoremap ; :|                                                                         "进入命令模式
 vnoremap ; :|                                                                         "进入命令模式
 cnoremap ; <ESC>|                                                                     "退出命令模式
+nnoremap x "_x|                                                                       "删除单个字符
 nnoremap dd "_dd|                                                                     "删除一行
 noremap ss <ESC>:wq!<CR>|                                                             "保存退出
 noremap qq <ESC>:q!<CR>|                                                              "不保存退出
@@ -109,7 +107,8 @@ noremap fc <ESC>:1,$!column -t<CR>|
 noremap <F1> <ESC>:set cursorline! cursorcolumn!<CR>|                                 "当前行列突出显示开关
 noremap <F2> <ESC>:set wrap! wrap?<CR>|                                               "是否自动换行开关
 noremap <F3> <ESC>:set relativenumber!<CR>|                                           "相对行号显示开关
-noremap <F4> <ESC>:call CompileAndRun()<CR>|                                          "执行当前文件
+noremap <F4> <ESC>:nohlsearch<CR>|                                                    "取消文本高亮
+noremap <F5> <ESC>:call CompileAndRun()<CR>|                                          "执行当前文件
 "##############################################################
 "# 自定义函数
 "##############################################################
@@ -126,4 +125,21 @@ function CompileAndRun()
 		exec "!go build %<"
 		exec "!go run %"
 	endif
+endfunction
+
+function Toggle(var)
+	if get(g:, a:var)
+		exec ":let g:".a:var." = 0"
+	else
+		exec ":let g:".a:var." = 1"
+	endif
+	exec ":echo ''"
+endfunction
+
+nnoremap <leader>; :call AddSemicolon()<CR>|
+vnoremap <leader>; :call AddSemicolon()<CR>|
+
+function AddSemicolon()
+	exec ":s/\\s*$/;/"
+	normal $a;
 endfunction
