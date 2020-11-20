@@ -45,6 +45,7 @@ alias vim='nvim'
 alias oldvim='\vim'
 alias snip='cd ~/.config/nvim/UltiSnips'
 alias upimg='~/.yun-notes-image/upload.sh'
+alias phps='php -S localhost:8000'
 
 ip() {
 	(mac || linux) && ifconfig | grep -e '.*192\.168.*';

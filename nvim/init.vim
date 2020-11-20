@@ -140,6 +140,6 @@ nnoremap <leader>; :call AddSemicolon()<CR>|
 vnoremap <leader>; :call AddSemicolon()<CR>|
 
 function AddSemicolon()
-	exec ":s/\\s*$/;/"
+	exec ":s/\\s*$//"
 	normal $a;
 endfunction
