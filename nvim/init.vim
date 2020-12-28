@@ -35,8 +35,9 @@ Plug 'SirVer/ultisnips'                                                         
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'lervag/vimtex'
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 call plug#end()
 "##############################################################
@@ -44,17 +45,17 @@ call plug#end()
 "##############################################################
 noremap <leader>t :below split term://zsh<CR>i|                                       "水平分屏
 noremap <leader>c ggVG"_d|                                                            "清空文本
-noremap <leader>f <ESC>:NERDTreeToggle<CR>|                                           "打开/关闭文件浏览器
 noremap <leader>pi <ESC>:PlugInstall<CR>|                                             "安装插件
 noremap <leader>pu <ESC>:PlugUpdate<CR>|                                              "更新插件
 noremap <leader>ps <ESC>:PlugStatus<CR>|                                              "查看插件安装状态
 noremap <leader>pc <ESC>:PlugClean<CR>|                                               "清除不在配置文件的插件
+noremap <leader>r <ESC>:registers<CR>|
 
 nnoremap <C-s> <ESC>:w<CR>|                                                           "保存当前的改动
 inoremap <C-s> <ESC>:w<CR>a|                                                          "保存当前的改动
 nnoremap <C-c> m`0v$h"+y``|                                                           "复制当前行
 vnoremap <C-c> "+y|                                                                   "复制当前选择块
-inoremap <C-v> <ESC>"+pa|                                                             "粘贴(插入模式)
+inoremap <C-v> <C-r>+|                                                                "粘贴(插入模式)
 cnoremap <C-v> <C-r>+|                                                                "粘贴(命令模式)
 nnoremap <C-z> u|                                                                     "撤销上次修改
 inoremap <C-z> <ESC>ui|                                                               "撤销上次修改
@@ -67,13 +68,13 @@ cnoremap <C-a> <C-B>|                                                           
 nnoremap <C-x> 0D"_dd|                                                                "剪切当前行
 nnoremap <C-d> 0v$h"+yo<ESC>"+gp|                                                     "将当前行复制到下一行
 
-nnoremap <C-j> :m .+1<CR>==|                                                          "向下移动整行
-inoremap <C-j> <Esc>:m .+1<CR>==gi|                                                   "向下移动整行
-vnoremap <C-j> :m '>+1<CR>gv=gv|                                                      "向下移动整行
+nnoremap <A-S-j> :m .+1<CR>==|                                                        "向下移动整行
+inoremap <A-S-j> <Esc>:m .+1<CR>==gi|                                                 "向下移动整行
+vnoremap <A-S-j> :m '>+1<CR>gv=gv|                                                    "向下移动整行
 
-nnoremap <C-k> :m .-2<CR>==|                                                          "向上移动整行
-inoremap <C-k> <Esc>:m .-2<CR>==gi|                                                   "向上移动整行
-vnoremap <C-k> :m '<-2<CR>gv=gv|                                                      "向上移动整行
+nnoremap <A-S-k> :m .-2<CR>==|                                                        "向上移动整行
+inoremap <A-S-k> <Esc>:m .-2<CR>==gi|                                                 "向上移动整行
+vnoremap <A-S-k> :m '<-2<CR>gv=gv|                                                    "向上移动整行
 
 nnoremap > v>|                                                                        "向右缩进
 vnoremap > >gv|                                                                       "向右缩进
@@ -102,13 +103,13 @@ noremap tn <ESC>:tab new default<CR>|                                           
 noremap th <ESC>:tabprevious<CR>|                                                     "移动至上一个标签页
 noremap tl <ESC>:tabnext<CR>|                                                         "移动至下一个标签页
 noremap to <ESC>:tabonly<CR>|                                                         "只保留当前标签页
-noremap fc <ESC>:1,$!column -t<CR>|
 
 noremap <F1> <ESC>:set cursorline! cursorcolumn!<CR>|                                 "当前行列突出显示开关
 noremap <F2> <ESC>:set wrap! wrap?<CR>|                                               "是否自动换行开关
 noremap <F3> <ESC>:set relativenumber!<CR>|                                           "相对行号显示开关
 noremap <F4> <ESC>:nohlsearch<CR>|                                                    "取消文本高亮
 noremap <F5> <ESC>:call CompileAndRun()<CR>|                                          "执行当前文件
+noremap <F6> <ESC>:NERDTreeToggle<CR>|                                                "打开/关闭文件浏览器
 "##############################################################
 "# 自定义函数
 "##############################################################

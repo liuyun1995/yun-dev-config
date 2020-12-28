@@ -7,16 +7,28 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 export TOOLS_HOME=$HOME/.tools
-export M2_HOME=/opt/apache-maven-3.6.3
-export JAVA_HOME=/opt/jdk1.8.0_251
-export JRE_HOME=${JAVA_HOME}/jre
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib:$M2_HOME/lib
+export GRADLE_HOME=/opt/gradle
+export GRADLE_USER_HOME=$HOME/.gradle
+export M2_HOME=/opt/maven
+export JAVA_HOME=/opt/jdk
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$M2_HOME/lib
+export NODE_PATH=/usr/local/lib/node_modules
 
 export GOROOT=/opt/go
-export GOPATH=$HOME/Public/MyPro/GoPro
+export GOPATH=$HOME/.go
 export GOPROXY=https://goproxy.cn
 export GO111MODULE=on
-export PATH="$PATH:${JAVA_HOME}/bin:$M2_HOME/bin:$GOROOT/bin:$GOPATH/bin"
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$M2_HOME/bin
+export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GRADLE_HOME/bin
+
+# 引用其他配置文件
+for file in $(find $HOME/.tools/ -type f -name "*.alias"); do
+	source $file
+done
 ###############################################################################
 # Shell Imporvement
 ###############################################################################
@@ -91,58 +103,42 @@ done
 ###############################################################################
 # Git
 ###############################################################################
-alias gconf='git_config'
-alias st='git status -sb'
-alias add='git add --all'
-alias cm='git commit -m'
-alias pull='git pull origin'
-alias push='git push origin'
-alias br='git branch'
-alias co='git checkout'
-alias merge='git merge --no-ff'
-alias bs="git branch | fzf --height 80% | sed 's/\*\|\s//g' | xargs git checkout"
-alias bd="git branch | fzf -m --height 80% | sed 's/\*\|\s//g' | xargs git branch -D"
+alias gst='git status -sb'
+alias gad='git add --all'
+alias gcm='git commit -m'
+alias gpl='git pull origin'
+alias gps='git push origin'
+alias gpu='git_push_trace'
+alias gbr='git branch'
+alias gco='git checkout'
+alias gcb='git_checkout_origin'
+alias gbs="git branch | fzf --height 80% | sed 's/\*\|\s//g' | xargs git checkout"
+alias gbd="git branch | fzf -m --height 80% | sed 's/\*\|\s//g' | xargs git branch -D"
 
-alias rets='git reset --soft'
-alias retm='git reset --mixed'
-alias reth='git reset --hard'
-#撤销Commit, 不撤销Add, 不撤销工作代码
-alias retsh='rets(){ git reset --soft HEAD~$1; }; rets'
-#撤销Commit, 撤销Add, 不撤销工作代码
-alias retmh='retm(){ git reset --mixed HEAD~$1; }; retm'
-#撤销Commit, 撤销Add, 撤销工作代码
-alias rethh='reth(){ git reset --hard HEAD~$1; }; reth'
+alias grets='git reset --soft'
+alias gretm='git reset --mixed'
+alias greth='git reset --hard'
+alias gretsh='rets(){ git reset --soft HEAD~$1; }; rets'
+alias gretmh='retm(){ git reset --mixed HEAD~$1; }; retm'
+alias grethh='reth(){ git reset --hard HEAD~$1; }; reth'
 
-alias reb='git rebase'
-alias rebi='git rebase -i'
-alias rebih='rebih(){ git rebase -i HEAD~$1; }; rebih'
-
-alias diff='git diff'
-alias tags='git tag -l'
-alias rem='git remote -v'
-alias rmc='git rm -r --cached .'
+alias gme='git merge --no-ff'
+alias gdi='git diff'
+alias gta='git tag -l'
+alias gre='git remote -v'
+alias gcr='git rm -r --cached .'
 alias gss='git stash save'
 alias gsl='git stash list'
 alias gsa='gsa(){ git stash apply stash@{$1}; }; gsa'
 alias gsd='gsd(){ git stash drop stash@{$1}; }; gsd'
+alias glo="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
+alias gconf='git_config'
 
-
-#删除远程分支或标签
-alias gdel='git push origin --delete'
-alias glog="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
-
-cor() {
-	git checkout -b $1 origin/$1
-}
-
-pushu() {
-	cbranch=$(git symbolic-ref --short HEAD)
-	git push -u origin $cbranch
-}
-
+git_checkout_origin() { git checkout -b $1 origin/$1; }
+git_push_trace() { cbranch=$(git symbolic-ref --short HEAD); git push -u origin $cbranch; }
 git_config() {
-	git config --global user.name "lewis"
-    git config --global user.email lewis.liu@ihr360.com
+	git config --global user.name "liuyun"
+    git config --global user.email "liuyunplus@gmail.com"
 	git config --global core.ignorecase false
     git config --global core.quotepath false
     git config --global gui.encoding utf-8
@@ -159,14 +155,14 @@ git_config() {
 ###############################################################################
 # Maven
 ###############################################################################
-alias ml='mvn clean'
-alias mc='mvn compile'
-alias mi='mvn install -Dmaven.test.skip=true'
-alias md='mvn deploy'
-alias mdt='mvn dependency:tree'
+alias mcl='mvn clean'
+alias mco='mvn compile'
+alias min='mvn install -Dmaven.test.skip=true'
+alias mdp='mvn deploy'
+alias mtr='mvn dependency:tree'
 alias mds='mvn dependency:sources'
 alias mdc='mvn dependency:copy-dependencies -DincludeScope=runtime'
-alias mcr='find ~/.m2 -name "*.lastUpdated" | xargs rm -rf'
+alias mcn='find ~/.m2 -name "*.lastUpdated" | xargs rm -rf'
 ###############################################################################
 # Docker
 ###############################################################################

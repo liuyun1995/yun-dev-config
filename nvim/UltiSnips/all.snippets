@@ -1,15 +1,35 @@
-snippet date "YYYY-MM-DD"
+snippet id
+`random id`
+endsnippet
+
+snippet num
+`!p if not snip.c: import random; snip.rv = random.randint(0, 100)`
+endsnippet
+
+snippet name
+`random name`
+endsnippet
+
+snippet cname
+`random cname`
+endsnippet
+
+snippet city
+`random city`
+endsnippet
+
+snippet ccity
+`random ccity`
+endsnippet
+
+snippet date
 `!v strftime("%Y-%m-%d")`
 endsnippet
 
-snippet datetime "YYYY-MM-DD hh:mm:ss"
+snippet datetime
 `!v strftime("%Y-%m-%d %H:%M:%S")`
 endsnippet
 
 snippet uuid
 `!p if not snip.c: import uuid; snip.rv = uuid.uuid4()`
-endsnippet
-
-snippet ren
-`ls | awk '{print "mv "$1,$1}'`
 endsnippet
