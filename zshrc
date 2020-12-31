@@ -1,5 +1,5 @@
 ###############################################################################
-# Env settings
+# Environment
 ###############################################################################
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
@@ -30,7 +30,7 @@ for file in $(find $HOME/.tools/ -type f -name "*.alias"); do
 	source $file
 done
 ###############################################################################
-# Shell Imporvement
+# Basics
 ###############################################################################
 mac() { [ "$(uname)" = "Darwin" ] && return 0; return 1; }
 linux() { [ "$(expr $(uname -s) | cut -c 1-5)" = "Linux" ] && return 0; return 1; }
@@ -56,7 +56,7 @@ alias x='extract'
 alias vim='nvim'
 alias oldvim='\vim'
 alias snip='cd ~/.config/nvim/UltiSnips'
-alias upimg='~/.yun-notes-image/upload.sh'
+alias imgpush='~/.yun-notes-image/upload.sh'
 alias phps='php -S localhost:8000'
 
 ip() {
@@ -103,40 +103,42 @@ done
 ###############################################################################
 # Git
 ###############################################################################
-alias gst='git status -sb'
-alias gad='git add --all'
-alias gcm='git commit -m'
-alias gpl='git pull origin'
-alias gps='git push origin'
-alias gpu='git_push_trace'
-alias gbr='git branch'
-alias gco='git checkout'
-alias gcb='git_checkout_origin'
-alias gbs="git branch | fzf --height 80% | sed 's/\*\|\s//g' | xargs git checkout"
-alias gbd="git branch | fzf -m --height 80% | sed 's/\*\|\s//g' | xargs git branch -D"
+alias st='git status -sb'
+alias add='git add --all'
+alias cm='git commit -m'
+alias pull='git pull origin'
+alias push='git push origin'
+alias pushu='git_push_trace'
+alias pushf='git_push_force'
+alias co='git checkout'
+alias cor='git_checkout_origin'
+alias br='git branch'
+alias bs="git branch | fzf --height 80% | sed 's/\*\|\s//g' | xargs git checkout"
+alias bd="git branch | fzf -m --height 80% | sed 's/\*\|\s//g' | xargs git branch -D"
 
-alias grets='git reset --soft'
-alias gretm='git reset --mixed'
-alias greth='git reset --hard'
-alias gretsh='rets(){ git reset --soft HEAD~$1; }; rets'
-alias gretmh='retm(){ git reset --mixed HEAD~$1; }; retm'
-alias grethh='reth(){ git reset --hard HEAD~$1; }; reth'
+alias rets='git reset --soft'
+alias retm='git reset --mixed'
+alias reth='git reset --hard'
+alias retsh='rets(){ git reset --soft HEAD~$1; }; rets'
+alias retmh='retm(){ git reset --mixed HEAD~$1; }; retm'
+alias rethh='reth(){ git reset --hard HEAD~$1; }; reth'
 
 alias gme='git merge --no-ff'
-alias gdi='git diff'
-alias gta='git tag -l'
-alias gre='git remote -v'
-alias gcr='git rm -r --cached .'
+alias gdiff='git diff'
+alias gtag='git tag -l'
+alias grem='git remote -v'
+alias grmc='git rm -r --cached .'
 alias gss='git stash save'
 alias gsl='git stash list'
 alias gsa='gsa(){ git stash apply stash@{$1}; }; gsa'
 alias gsd='gsd(){ git stash drop stash@{$1}; }; gsd'
-alias glo="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
-alias gconf='git_config'
+alias glog="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
+alias gconf='git_init_config'
 
-git_checkout_origin() { git checkout -b $1 origin/$1; }
 git_push_trace() { cbranch=$(git symbolic-ref --short HEAD); git push -u origin $cbranch; }
-git_config() {
+git_push_force() { cbranch=$(git symbolic-ref --short HEAD); git push -f origin $cbranch; }
+git_checkout_origin() { git checkout -b $1 origin/$1; }
+git_init_config() {
 	git config --global user.name "liuyun"
     git config --global user.email "liuyunplus@gmail.com"
 	git config --global core.ignorecase false
@@ -166,44 +168,38 @@ alias mcn='find ~/.m2 -name "*.lastUpdated" | xargs rm -rf'
 ###############################################################################
 # Docker
 ###############################################################################
-alias dk='docker'
-alias dkc='docker create'
-
-alias dkr='docker run'
-alias dkrr='docker run --rm'
-
-alias dkri='docker run -i -t'
-alias dkrri='docker run --rm -i -t'
-
-alias dkrd='docker run -d'
-alias dkrrd='docker run --rm -d'
-
-alias dkrm='docker rm'
-alias dkrmi='docker rmi'
-
-alias dks='docker start'
-alias dksi='docker start -i'
-alias dkrs='docker restart'
-alias dkstop='docker stop'
-
-alias dki='docker inspect'
-alias dkps='docker ps'
-alias dkpsa='docker ps -a'
-alias dktop='docker top'
-
-alias dke='docker exec'
-alias dkei='docker exec -i -t'
-alias dkl='docker logs'
-alias dklf='docker logs -f'
-
-alias dkimg='docker images'
-alias dkp='docker pull'
-alias dksh='docker search'
+alias d='docker'
+alias drun='docker run'
+alias drm='docker rm'
+alias dstart='docker start'
+alias dstop='docker stop'
+alias dps='docker ps'
+alias dexec='docker exec'
+alias dlogs='docker logs'
+alias dlogsf='docker logs -f'
+alias dimg='docker images'
+alias dpull='docker pull'
 ###############################################################################
 # Go
 ###############################################################################
 alias gb='go build'
 alias gr='go run'
-
+###############################################################################
+# Python
+################################################################################
 alias python='~/.pyenv/bin/python'
 alias pip='~/.pyenv/bin/python -m pip'
+alias pls='pip list'
+alias pin='pip install'
+alias puin='pip uninstall'
+###############################################################################
+# NodeJs
+#################################################################################
+alias ni='npm install'
+alias nls='npm list --depth 0'
+alias nui='npm uninstall'
+alias nup='npm update'
+alias nig='npm install -g'
+alias nlsg='npm list -g --depth 0'
+alias nuig='npm uninstall -g'
+alias nupg='npm update -g'
