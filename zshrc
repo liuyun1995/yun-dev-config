@@ -24,6 +24,7 @@ export PATH=$PATH:$M2_HOME/bin
 export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GRADLE_HOME/bin
+export PATH=$PATH:$HOME/.pyenv/bin
 
 # 引用其他配置文件
 for file in $(find $HOME/.tools/ -type f -name "*.alias"); do
@@ -190,16 +191,16 @@ alias gr='go run'
 alias python='~/.pyenv/bin/python'
 alias pip='~/.pyenv/bin/python -m pip'
 alias pls='pip list'
-alias pin='pip install'
-alias puin='pip uninstall'
+alias pins='pip install'
+alias puni='pip uninstall'
 ###############################################################################
 # NodeJs
 #################################################################################
-alias ni='npm install'
 alias nls='npm list --depth 0'
-alias nui='npm uninstall'
+alias nins='npm install'
+alias nuni='npm uninstall'
 alias nup='npm update'
-alias nig='npm install -g'
 alias nlsg='npm list -g --depth 0'
-alias nuig='npm uninstall -g'
+alias ninsg='npm install -g'
+alias nunig='npm uninstall -g'
 alias nupg='npm update -g'
