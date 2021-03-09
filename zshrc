@@ -25,6 +25,7 @@ export PATH=$PATH:$GOROOT/bin
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GRADLE_HOME/bin
 export PATH=$PATH:$HOME/.pyenv/bin
+export PATH=$PATH:/usr/bin/websocketd
 
 # 引用其他配置文件
 for file in $(find $HOME/.tools/ -type f -name "*.alias"); do
@@ -59,6 +60,7 @@ alias oldvim='\vim'
 alias snip='cd ~/.config/nvim/UltiSnips'
 alias imgpush='~/.yun-notes-image/upload.sh'
 alias phps='php -S localhost:8000'
+alias vhost='vim /etc/hosts'
 
 ip() {
 	(mac || linux) && ifconfig | grep -e '.*192\.168.*';
@@ -204,3 +206,9 @@ alias nlsg='npm list -g --depth 0'
 alias ninsg='npm install -g'
 alias nunig='npm uninstall -g'
 alias nupg='npm update -g'
+
+alias ngstart='sudo nginx'
+alias ngstop='sudo nginx -s stop'
+alias ngreload='sudo nginx -s reload'
+alias ngconf='vim /etc/nginx/nginx.conf'
+

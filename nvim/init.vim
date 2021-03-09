@@ -55,7 +55,7 @@ nnoremap <C-s> <ESC>:w<CR>|                                                     
 inoremap <C-s> <ESC>:w<CR>a|                                                          "保存当前的改动
 nnoremap <C-c> m`0v$h"+y``|                                                           "复制当前行
 vnoremap <C-c> "+y|                                                                   "复制当前选择块
-inoremap <C-v> <C-r>+|                                                                "粘贴(插入模式)
+inoremap <C-v> <ESC>"+p|                                                              "粘贴(插入模式)
 cnoremap <C-v> <C-r>+|                                                                "粘贴(命令模式)
 nnoremap <C-z> u|                                                                     "撤销上次修改
 inoremap <C-z> <ESC>ui|                                                               "撤销上次修改
@@ -110,37 +110,40 @@ noremap <F3> <ESC>:set relativenumber!<CR>|                                     
 noremap <F4> <ESC>:nohlsearch<CR>|                                                    "取消文本高亮
 noremap <F5> <ESC>:call CompileAndRun()<CR>|                                          "执行当前文件
 noremap <F6> <ESC>:NERDTreeToggle<CR>|                                                "打开/关闭文件浏览器
+map <F7> <ESC>:set pastetoggle<CR>|
 "##############################################################
 "# 自定义函数
 "##############################################################
 function CompileAndRun()
 	exec "w"
 	if &filetype == 'sh'
-		exec "!bash %"
+		execute "!bash %"
 	elseif &filetype == 'python'
-		exec "!python %"
+		execute "!python %"
 	elseif &filetype == 'java'
-		exec "!javac %"
-        exec "!java %<"
+		execute "!javac %"
+        execute "!java %<"
 	elseif &filetype == 'go'
-		exec "!go build %<"
-		exec "!go run %"
+		execute "!go build %<"
+		execute "!go run %"
 	endif
 endfunction
 
 function Toggle(var)
 	if get(g:, a:var)
-		exec ":let g:".a:var." = 0"
+		execute ":let g:".a:var." = 0"
 	else
-		exec ":let g:".a:var." = 1"
+		execute ":let g:".a:var." = 1"
 	endif
 	exec ":echo ''"
 endfunction
 
-nnoremap <leader>; :call AddSemicolon()<CR>|
-vnoremap <leader>; :call AddSemicolon()<CR>|
+nnoremap <leader>; :call AddSemicolon(';')<CR>|
+vnoremap <leader>; :call AddSemicolon(';')<CR>|
+nnoremap <leader>0 :call AddSemicolon('\|')<CR>|
+vnoremap <leader>0 :call AddSemicolon('\|')<CR>|
 
-function AddSemicolon()
-	exec ":s/\\s*$//"
-	normal $a;
+function AddSemicolon(tag)
+	execute ":s/\\s*$//"
+	execute "normal $a".a:tag
 endfunction
