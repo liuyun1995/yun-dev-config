@@ -29,10 +29,7 @@ ddump(){
 ####################################
 # k8s别名
 ####################################
-alias k='kubectl'
-alias kpods='kubectl get pods'
-alias ksvc='kubectl get svc'
-ksn(){
+kns(){
 	kubectl get namespace $1 > /dev/null; 
 	if [ $? -eq 1 ]; then
 		echo "No Find Namespace: $1"
@@ -41,5 +38,7 @@ ksn(){
 	kubectl config set-context $(kubectl config current-context) --namespace=$1;
 	echo "Namespace: $1"
 }
-klogf(){ kubectl logs -f --tail=500 $1; }
+kpods(){ kubectl get pods $1; }
+ksvc(){ kubectl get svc $1; }
+klogs(){ kubectl logs -f --tail=500 $1; }
 kexec(){ kubectl exec -it $1 bash; }
