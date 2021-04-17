@@ -40,6 +40,7 @@ config_python() {
 	echo "================ 开始配置python ================"
 	rm -rf ~/.pip
 	ln -sf $path/python/pip ~/.pip
+	python3 -m venv ~/.pyenv
 }
 
 config_latexmkrc() {

@@ -23,6 +23,7 @@ sudo apt-get install flameshot
 sudo apt-get install fzf  
 sudo apt-get install nodejs  
 sudo apt-get install npm  
+sudo apt-get install python3-venv
 
 #### 4.设置英文目录
 
