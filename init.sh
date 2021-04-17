@@ -24,9 +24,10 @@ config_ssh() {
 	ln -sf $path/ssh/config ~/.ssh/config
 
 	ssh_home=$HOME/.ssh
-	file_num=$(ls $ssh_home | grep -nE '.*(github|gitee).*' | wc -l)
-	if [[ $file_num -le 0 ]]; then
+	if [ ! -f "$ssh_home/id_rsa_github" ]; then
 		ssh-keygen -q -m PEM -t rsa -b 4096 -N '' -C "liuyunplus@gmail.com" -f $ssh_home/id_rsa_github
+	fi
+	if [ ! -f "$ssh_home/id_rsa_gitee" ]; then
 		ssh-keygen -q -m PEM -t rsa -b 4096 -N '' -C "liuyunplus@gmail.com" -f $ssh_home/id_rsa_gitee
 	fi
 }
