@@ -2,7 +2,7 @@
 #### 1.配置国内镜像源
 
 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup  
-wget https://raw.githubusercontent.com/liuyun1995/yun-dev-config/master/sources.list -O /etc/apt/sources.list
+wget https://raw.githubusercontent.com/liuyun1995/yun-dev-config/master/ubuntu/sources.list -O /etc/apt/sources.list
 
 #### 2.更新软件源
 
@@ -43,4 +43,4 @@ wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - 
 
 #### 6.执行后续安装
 
-wget https://raw.githubusercontent.com/liuyun1995/yun-dev-config/master/install.sh -O - | sh
+wget https://raw.githubusercontent.com/liuyun1995/yun-dev-config/master/init.sh -O - | sh
