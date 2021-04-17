@@ -13,3 +13,7 @@
 [user]
 	name = liuyun
 	email = liuyunplus@gmail.com
+[includeIf "gitdir:~/Public/MyWork/"]
+    path = .gitconfig_work
+[pull]
+	rebase = false

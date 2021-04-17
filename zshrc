@@ -162,7 +162,8 @@ git_init_config() {
 ###############################################################################
 alias mcl='mvn clean'
 alias mco='mvn compile'
-alias min='mvn install -Dmaven.test.skip=true'
+alias min='mvn clean install -Dmaven.test.skip=true'
+alias mpa='mvn clean package -Dmaven.test.skip=true'
 alias mdp='mvn deploy'
 alias mtr='mvn dependency:tree'
 alias mds='mvn dependency:sources'
