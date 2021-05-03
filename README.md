@@ -1,4 +1,4 @@
-# EnvConfig
+# yun-dev-config
 #### 1.配置国内镜像源
 
 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup  
