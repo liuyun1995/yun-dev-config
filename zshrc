@@ -26,11 +26,16 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GRADLE_HOME/bin
 export PATH=$PATH:$HOME/.pyenv/bin
 export PATH=$PATH:/usr/bin/websocketd
+export PATH=$PATH:$GRADLE_HOME/bin
+export PATH=$PATH:/usr/local/opt/mysql-client/bin
 
 # 引用其他配置文件
 for file in $(find $HOME/.tools/ -type f -name "*.alias"); do
 	source $file
 done
+
+alias dev='~/.WorkScript/login.sh dev'
+alias stage='~/.WorkScript/login.sh stage'
 ###############################################################################
 # Basics
 ###############################################################################
@@ -127,7 +132,6 @@ alias retmh='retm(){ git reset --mixed HEAD~$1; }; retm'
 alias rethh='reth(){ git reset --hard HEAD~$1; }; reth'
 
 alias gme='git merge --no-ff'
-alias gdiff='git diff'
 alias gtag='git tag -l'
 alias grem='git remote -v'
 alias grmc='git rm -r --cached .'
@@ -138,6 +142,10 @@ alias gsd='gsd(){ git stash drop stash@{$1}; }; gsd'
 alias glog="git log --graph --pretty='format:%C(red)%d%C(reset) %C(yellow)%h%C(reset) %ar %C(green)%aN%C(reset) %s'"
 alias gconf='git_init_config'
 
+gdff() {
+	preview="git diff $@ --color=always -- {-1}"
+	git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
 git_push_trace() { cbranch=$(git symbolic-ref --short HEAD); git push -u origin $cbranch; }
 git_push_force() { cbranch=$(git symbolic-ref --short HEAD); git push -f origin $cbranch; }
 git_checkout_origin() { git checkout -b $1 origin/$1; }
@@ -170,15 +178,23 @@ alias mds='mvn dependency:sources'
 alias mdc='mvn dependency:copy-dependencies -DincludeScope=runtime'
 alias mcn='find ~/.m2 -name "*.lastUpdated" | xargs rm -rf'
 ###############################################################################
+# Gradle
+###############################################################################
+alias grb='gradle build -x test'
+###############################################################################
 # Docker
 ###############################################################################
 alias d='docker'
 alias drun='docker run'
 alias drm='docker rm'
+alias drme="docker rm \$(docker ps -a | grep \"Exited\" | awk '{print \$1}')"
+alias drmi='docker rmi'
+alias drmin="docker rmi \$(docker images | grep \"none\" | awk '{print \$3}')"
 alias dstart='docker start'
 alias dstop='docker stop'
 alias dps='docker ps'
-alias dexec='docker exec'
+alias dpsa='docker ps -a'
+alias dexec='dexec() { docker exec -it $1 bash }; dexec'
 alias dlogs='docker logs'
 alias dlogsf='docker logs -f'
 alias dimg='docker images'
@@ -196,6 +212,8 @@ alias pip='~/.pyenv/bin/python -m pip'
 alias pls='pip list'
 alias pins='pip install'
 alias puni='pip uninstall'
+alias pfr='pip freeze > requirements.txt'
+alias pir='pip install -r requirements.txt'
 ###############################################################################
 # NodeJs
 #################################################################################
@@ -207,7 +225,9 @@ alias nlsg='npm list -g --depth 0'
 alias ninsg='npm install -g'
 alias nunig='npm uninstall -g'
 alias nupg='npm update -g'
-
+###############################################################################
+# Nginx
+#################################################################################
 alias ngstart='sudo nginx'
 alias ngstop='sudo nginx -s stop'
 alias ngreload='sudo nginx -s reload'
